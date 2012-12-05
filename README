@@ -1,0 +1,14 @@
+Configure using configure.sh
+
+Example crontab entries
+
+LOGNORMAL=/usr/local/src/LogNormalShim
+
+# Every five minutes, scrape the past ten minutes of intraday data from LogNormal and send it to Graphite
+*/5 * * * * php $LOGNORMAL/Client/scripts/backfill_intraday.php --from "-10 minutes"
+*/5 * * * * php $LOGNORMAL/Client/scripts/backfill_intraday_by_page.php --from "-10 minutes"
+# 2>&1 > /dev/null
+
+# Every night, scrape yesterday's daily/drilldown data from LogNormal and send it to Graphite.  Five minutes left between scripts to give LogNormal a break (this is a thing, right?  seems to help with the 504's.)
+0 10 * * * php $LOGNORMAL/Client/scripts/backfill_daily.php --from "-1day" 2>&1 > /dev/null
+0 15 * * * php $LOGNORMAL/Client/scripts/backfill_daily_by_page.php --from "-1day" 2>&1 > /dev/n

@@ -1,0 +1,11 @@
+{
+    "email": "me@example.com",
+    "password": "pass",
+    "domain" "etsy.com",
+    "api_url": "lognormal.internal.net",
+    "graphite": {
+        "url": "graphite.internal.net",
+        "port": "2344",
+        "namespace": "performance.lognormal"
+    }
+}
